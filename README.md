@@ -1,0 +1,2 @@
+# clob
+C globbing library
