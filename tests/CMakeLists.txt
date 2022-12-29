@@ -1,0 +1,12 @@
+macro(clob_add_test_with_libraries TESTNAME FILES LIBRARIES TEST_WORKING_DIRECTORY)
+    add_executable(${TESTNAME} ${FILES})
+    target_link_libraries(${TESTNAME} gtest gmock gtest_main ${LIBRARIES})
+    add_test(NAME ${TESTNAME} COMMAND ${TESTNAME})
+endmacro()
+
+clob_add_test_with_libraries(test_simple_glob test_simple_glob.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
+clob_add_test_with_libraries(test_char_classes test_char_classes.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
+clob_add_test_with_libraries(test_extended_glob test_extended_glob.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
+clob_add_test_with_libraries(test_nested_glob test_nested_glob.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
+clob_add_test_with_libraries(test_malformed_pattern test_malformed_pattern.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
+clob_add_test_with_libraries(test_special_char_escaping test_special_char_escaping.cpp ${PROJECT_NAME} "${PROJECT_DIR}")
