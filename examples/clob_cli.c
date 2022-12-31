@@ -9,9 +9,6 @@ int main(int argc, char *argv[])
 	}
 	printf("argv: %s\n", argv[1]);
 	if (clob_compile_pattern(argv[1])) {
-		clob_print_pattern();
-		puts("");
-		puts("");
 		printf("matched: %d\n", clob_match(argv[2]));
 		clob_free_pattern();
 		return 0;
