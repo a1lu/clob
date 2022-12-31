@@ -5,14 +5,14 @@
 extern "C" {
 #endif
 
-struct pattern;
+struct clob_pattern;
 
-struct pattern *clob_compile_pattern(char const *pattern);
-int clob_match(struct pattern *pattern, char const *string);
-void clob_free_pattern(struct pattern *);
+struct clob_pattern *clob_compile_pattern(char const *pattern);
+int clob_match(struct clob_pattern *pattern, char const *string);
+void clob_free_pattern(struct clob_pattern *pattern);
 
 #ifdef _CLOB_DEBUG_BRZ_
-void clob_print_pattern();
+void clob_print_pattern(struct clob_pattern *pattern);
 #endif
 
 #ifdef __cplusplus
