@@ -3,14 +3,12 @@
 
 TEST(special_char_escaping, unexpected_character)
 {
-	char *pattern = (char *)"\\!(escaped)";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("\\!(escaped)");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(special_char_escaping, escaped_em)
 {
-	char *pattern = (char *)"\\!escaped";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_TRUE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("\\!escaped");
+	EXPECT_NE(pattern, nullptr);
 }

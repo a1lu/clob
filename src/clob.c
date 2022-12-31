@@ -28,7 +28,9 @@
 		}                                 \
 	} while (0)
 
-static glob *match_glob = NULL;
+struct clob_pattern {
+	glob *glob;
+};
 
 static void cleanup(glob **start, glob **end)
 {
@@ -211,27 +213,35 @@ error:
 	return NULL;
 }
 
-int clob_compile_pattern(char const *pattern)
+struct clob_pattern *clob_compile_pattern(char const *pattern)
 {
-	match_glob = compile(pattern);
-	return match_glob ? 1 : 0;
+	glob *glob = compile(pattern);
+	if (!glob) {
+		return NULL;
+	} else {
+		struct clob_pattern *ret = (struct clob_pattern *)malloc(
+			sizeof(struct clob_pattern));
+		ret->glob = glob;
+		return ret;
+	}
 }
 
-int clob_match(char const *string)
+int clob_match(struct clob_pattern *pattern, char const *string)
 {
-	return match_glob->matches(match_glob, string);
+	return pattern->glob->matches(pattern->glob, string);
 }
 
-void clob_free_pattern()
+void clob_free_pattern(struct clob_pattern *pattern)
 {
-	free_glob(match_glob);
+	free_glob(pattern->glob);
+	free(pattern);
 }
 
 #ifdef _CLOB_DEBUG_BRZ_
 
-void clob_print_pattern()
+void clob_print_pattern(struct clob_pattern *pattern)
 {
-	match_glob->print(match_glob);
+	pattern->glob->print(pattern->glob);
 }
 
 #endif

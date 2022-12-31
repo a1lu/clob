@@ -8,9 +8,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	printf("argv: %s\n", argv[1]);
-	if (clob_compile_pattern(argv[1])) {
-		printf("matched: %d\n", clob_match(argv[2]));
-		clob_free_pattern();
+	struct clob_pattern *pattern = clob_compile_pattern(argv[1]);
+	if (pattern) {
+		printf("matched: %d\n", clob_match(pattern, argv[2]));
+		clob_free_pattern(pattern);
 		return 0;
 	}
 	return 1;
