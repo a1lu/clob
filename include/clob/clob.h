@@ -5,9 +5,9 @@
 extern "C" {
 #endif
 
-int compile_pattern(char const *pattern);
-int match(char const *string);
-void free_pattern();
+int clob_compile_pattern(char const *pattern);
+int clob_match(char const *string);
+void clob_free_pattern();
 
 #ifdef __cplusplus
 }

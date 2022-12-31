@@ -8,12 +8,12 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	printf("argv: %s\n", argv[1]);
-	if (compile_pattern(argv[1])) {
-		print_pattern();
+	if (clob_compile_pattern(argv[1])) {
+		clob_print_pattern();
 		puts("");
 		puts("");
-		printf("matched: %d\n", match(argv[2]));
-		free_pattern();
+		printf("matched: %d\n", clob_match(argv[2]));
+		clob_free_pattern();
 		return 0;
 	}
 	return 1;

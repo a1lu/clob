@@ -211,25 +211,25 @@ error:
 	return NULL;
 }
 
-int compile_pattern(char const *pattern)
+int clob_compile_pattern(char const *pattern)
 {
 	match_glob = compile(pattern);
 	return match_glob ? 1 : 0;
 }
 
-int match(char const *string)
+int clob_match(char const *string)
 {
 	return match_glob->matches(match_glob, string);
 }
 
-void free_pattern()
+void clob_free_pattern()
 {
 	free_glob(match_glob);
 }
 
 #ifdef _CLOB_DEBUG_BRZ_
 
-void print_pattern()
+void clob_print_pattern()
 {
 	match_glob->print(match_glob);
 }
