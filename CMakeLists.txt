@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(
     clob
-    VERSION 1.0.0
+    VERSION 1.1.0
     LANGUAGES C CXX)
 
 add_library(${PROJECT_NAME})
