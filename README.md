@@ -77,8 +77,6 @@ $ make && ctest
 
 ## Known Issues
 
- * Currently a global variable is used to store the compiled pattern, 
-   so that only one pattern can be compiled
  * CPP compiler is required to build tests, since [GoogleTest] is used
  * `stdio` is used inside the library
 

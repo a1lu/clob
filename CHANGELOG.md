@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- replace global statically declared glob buffer with a handle pointer
+
 ## [1.0.0] - 2023-01-01
 
 ### Added
