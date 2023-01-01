@@ -218,7 +218,6 @@ struct clob_pattern *clob_compile_pattern(char const *pattern)
 	glob *glob = compile(pattern);
 	if (!glob) {
 		return NULL;
-
 	} else {
 		struct clob_pattern *ret = (struct clob_pattern *)malloc(
 			sizeof(struct clob_pattern));

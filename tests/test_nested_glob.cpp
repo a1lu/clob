@@ -3,34 +3,35 @@
 
 TEST(nested_glob, at_plus_nested)
 {
-	char *pattern = "@(+(nest)ed)";
-	clob_compile_pattern(pattern);
-	EXPECT_FALSE(clob_match("misc/passing"));
-	EXPECT_FALSE(clob_match("misc/failing"));
-	EXPECT_TRUE(clob_match("nested"));
-	EXPECT_TRUE(clob_match("nestnested"));
-	EXPECT_FALSE(clob_match(""));
+	struct clob_pattern *pattern = clob_compile_pattern("@(+(nest)ed)");
+	EXPECT_FALSE(clob_match(pattern, "misc/passing"));
+	EXPECT_FALSE(clob_match(pattern, "misc/failing"));
+	EXPECT_TRUE(clob_match(pattern, "nested"));
+	EXPECT_TRUE(clob_match(pattern, "nestnested"));
+	EXPECT_FALSE(clob_match(pattern, ""));
+	clob_free_pattern(pattern);
 }
 
 TEST(nested_glob, qm_star_a_or_b)
 {
-	char *pattern = "?(*(a|b))";
-	clob_compile_pattern(pattern);
-	EXPECT_FALSE(clob_match("misc/passing"));
-	EXPECT_FALSE(clob_match("misc/failing"));
-	EXPECT_TRUE(clob_match("aa"));
-	EXPECT_TRUE(clob_match("bb"));
-	EXPECT_FALSE(clob_match("ab"));
-	EXPECT_TRUE(clob_match(""));
+	struct clob_pattern *pattern = clob_compile_pattern("?(*(a|b))");
+	EXPECT_FALSE(clob_match(pattern, "misc/passing"));
+	EXPECT_FALSE(clob_match(pattern, "misc/failing"));
+	EXPECT_TRUE(clob_match(pattern, "aa"));
+	EXPECT_TRUE(clob_match(pattern, "bb"));
+	EXPECT_FALSE(clob_match(pattern, "ab"));
+	EXPECT_TRUE(clob_match(pattern, ""));
+	clob_free_pattern(pattern);
 }
 
 TEST(nested_glob, star_passing_at_star)
 {
-	char *pattern = "misc/pa@(s|*(s))ing";
-	clob_compile_pattern(pattern);
-	EXPECT_TRUE(clob_match("misc/paing"));
-	EXPECT_TRUE(clob_match("misc/pasing"));
-	EXPECT_TRUE(clob_match("misc/passing"));
-	EXPECT_TRUE(clob_match("misc/passsing"));
-	EXPECT_FALSE(clob_match("misc/failing"));
+	struct clob_pattern *pattern =
+		clob_compile_pattern("misc/pa@(s|*(s))ing");
+	EXPECT_TRUE(clob_match(pattern, "misc/paing"));
+	EXPECT_TRUE(clob_match(pattern, "misc/pasing"));
+	EXPECT_TRUE(clob_match(pattern, "misc/passing"));
+	EXPECT_TRUE(clob_match(pattern, "misc/passsing"));
+	EXPECT_FALSE(clob_match(pattern, "misc/failing"));
+	clob_free_pattern(pattern);
 }

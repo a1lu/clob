@@ -3,42 +3,36 @@
 
 TEST(malformed_pattern, mismatching_parenthesis)
 {
-	char *pattern = (char *)"?(malformed";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("?(malformed");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(malformed_pattern, unexpected_parenthesis)
 {
-	char *pattern = (char *)"(malformed";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("(malformed");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(malformed_pattern, unexpected_parenthesis_2)
 {
-	char *pattern = (char *)"misc/passing)";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("misc/passing)");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(malformed_pattern, mismatching_brackets)
 {
-	char *pattern = (char *)"misc/[";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("misc/[");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(malformed_pattern, mismatching_brackets_2)
 {
-	char *pattern = (char *)"misc/[a-";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("misc/[a-");
+	EXPECT_EQ(pattern, nullptr);
 }
 
 TEST(malformed_pattern, unexpected_character_pipe)
 {
-	char *pattern = (char *)"|pipe";
-	int ret = clob_compile_pattern(pattern);
-	EXPECT_FALSE(ret);
+	struct clob_pattern *pattern = clob_compile_pattern("|pipe");
+	EXPECT_EQ(pattern, nullptr);
 }
